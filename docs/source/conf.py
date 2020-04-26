@@ -13,7 +13,7 @@
 import os
 import sys
 import sphinx_rtd_theme
-from lyse import __version__
+# from lyse import __version__
 sys.path.insert(0, os.path.abspath('../..'))
 
 
@@ -23,7 +23,7 @@ project = 'lyse'
 copyright = '2020, labscript suite'
 author = 'labscript suite'
 
-version = __version__
+version = "2.6.0"
 release = version
 
 # -- General configuration ---------------------------------------------------
