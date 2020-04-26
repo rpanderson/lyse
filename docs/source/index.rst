@@ -9,7 +9,7 @@
 
    api
    releases
-   Home <https://labscriptsuite.org>
+   Home <http://labscriptsuite.org>
    Source Code <https://github.com/labscript-suite/lyse>
 
 lyse
@@ -50,7 +50,7 @@ lyse can be installed on Python 3.6 and later by running:
 
 .. code-block:: console
 
-   $ pip install labscript-lyse
+   $ pip install --index-url https://test.pypi.org/simple/ lyse
 
 Tutorials
 ---------
