@@ -1,0 +1,278 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>lyse 2.6.0 &mdash; lyse testing documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/lyse.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Release Notes" href="../releases.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> lyse
+          
+
+          
+            
+            <img src="../_static/lyse.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                testing
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../releases.html">Release Notes</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">lyse 2.6.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bug-fixes">Bug Fixes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#enhancements">Enhancements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#api-changes">API Changes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="https://labscriptsuite.org">Home</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/labscript-suite/lyse">Source Code</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">lyse</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../releases.html">Release Notes</a> &raquo;</li>
+        
+      <li>lyse 2.6.0</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/release/release_2_6_0.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="lyse-2-6-0">
+<h1>lyse 2.6.0<a class="headerlink" href="#lyse-2-6-0" title="Permalink to this headline">¶</a></h1>
+<p><em>Release date: 2020-02-17</em></p>
+<p>This release includes six bugfixes, two changes to work with newer versions of a
+library, and two enhancements.</p>
+<div class="section" id="bug-fixes">
+<h2>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Fix bug where lyse would fail to terminate subprocesses upon quit. Normal
+subprocesses would eventually terminate themselves, but this caused lyse to hang
+whilst closing waiting for them.
+(<a class="reference external" href="https://bitbucket.org/labscript_suite/labscript_devices/pull-requests/63">PR #63</a>)</p></li>
+<li><p>Increase the timeout for starting subprocesses to 30 seconds. Slow computers starting
+lyse, or when starting many subprocesses at once, would often cause timeouts which
+necessitated restarting lyse.
+(<a class="reference external" href="https://bitbucket.org/labscript_suite/labscript_devices/pull-requests/64">PR #64</a>)</p></li>
+<li><p>Fix bug where lyse’s close button was unresponsive if there were no analysis routines.
+(<a class="reference external" href="https://bitbucket.org/labscript_suite/labscript_devices/pull-requests/67">PR #67</a>)</p></li>
+<li><p>Fix incorrect logic for updating the Qt model and dataframe in lyse - it is hoped that
+this will resolve an intermittent issue (issue #45) in which the dataframe and Qt
+model are sometimes not updated after analysis completes. If anyone sees the buggy
+behaviour again, please reopen issue #45 or a new bug report.
+(<a class="reference external" href="https://bitbucket.org/labscript_suite/labscript_devices/pull-requests/68">PR #68</a>)</p></li>
+<li><p>Fix a bug where lyse could crash if loading shots with different numbers of levels in
+the hierarchy of their corresponding dataframes.
+(<a class="reference external" href="https://bitbucket.org/labscript_suite/labscript_devices/pull-requests/71">PR #71</a>)</p></li>
+<li><p>In analysis routine subprocesses, force the multiprocessing module to spawn new
+processes instead of forking. This allows analysis routines to use the multiprocessing
+module, whereas otherwise this causes crashes due to zmq not being fork-safe. This
+only affects Unix, where forking is the default behaviour of the multiprocessing
+module - on Windows this was not an issue since processes were always spawned fresh.
+(<a class="reference external" href="https://bitbucket.org/labscript_suite/labscript_devices/pull-requests/65">PR #65</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="enhancements">
+<h2>Enhancements<a class="headerlink" href="#enhancements" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Expand the allowed datatypes that may be saved/loaded as HDF5 attributes via
+<code class="docutils literal notranslate"><span class="pre">Run.save_result()</span></code> etc to anything supported by
+<code class="docutils literal notranslate"><span class="pre">labscript_utils.properties.get/set_attribute(s)</span></code>. This means that datatypes not
+supported natively by HDF5 are JSON encoded and saved as a string with a prefix
+indicating this.
+(PRs <a class="reference external" href="https://bitbucket.org/labscript_suite/labscript_devices/pull-requests/66">#66</a>
+and <a class="reference external" href="https://bitbucket.org/labscript_suite/labscript_devices/pull-requests/69">#69</a>)</p></li>
+<li><p>Allow instantiating a <code class="docutils literal notranslate"><span class="pre">Run()</span></code> object from within a function, not just at the global
+scope. The default group that results will be saved to will be the name of the file
+the <code class="docutils literal notranslate"><span class="pre">Run()</span></code> object is instantiated in.
+(<a class="reference external" href="https://bitbucket.org/labscript_suite/labscript_devices/pull-requests/72">PR #72</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="api-changes">
+<h2>API Changes<a class="headerlink" href="#api-changes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Update to no longer use the deprecated <code class="docutils literal notranslate"><span class="pre">pandas</span></code> <code class="docutils literal notranslate"><span class="pre">convert_objects()</span></code> method, in favour
+of the newer <code class="docutils literal notranslate"><span class="pre">infer_objects</span></code> method.
+(<a class="reference external" href="https://bitbucket.org/labscript_suite/labscript_devices/pull-requests/70">PR #70</a>)</p></li>
+<li><p>Do not throw a version error about <code class="docutils literal notranslate"><span class="pre">pandas</span></code> v1.0</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../releases.html" class="btn btn-neutral float-left" title="Release Notes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, labscript suite
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

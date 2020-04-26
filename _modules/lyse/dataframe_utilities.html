@@ -1,0 +1,379 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>lyse.dataframe_utilities &mdash; lyse testing documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/lyse.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> lyse
+          
+
+          
+            
+            <img src="../../_static/lyse.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                testing
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releases.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://labscriptsuite.org">Home</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/labscript-suite/lyse">Source Code</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">lyse</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../lyse.html">lyse</a> &raquo;</li>
+        
+      <li>lyse.dataframe_utilities</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for lyse.dataframe_utilities</h1><div class="highlight"><pre>
+<span></span><span class="c1">#####################################################################</span>
+<span class="c1">#                                                                   #</span>
+<span class="c1"># /dataframe_utilities.py                                           #</span>
+<span class="c1">#                                                                   #</span>
+<span class="c1"># Copyright 2013, Monash University                                 #</span>
+<span class="c1">#                                                                   #</span>
+<span class="c1"># This file is part of the program lyse, in the labscript suite     #</span>
+<span class="c1"># (see http://labscriptsuite.org), and is licensed under the        #</span>
+<span class="c1"># Simplified BSD License. See the license.txt file in the root of   #</span>
+<span class="c1"># the project for the full license.                                 #</span>
+<span class="c1">#                                                                   #</span>
+<span class="c1">#####################################################################</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">labscript_utils</span> <span class="kn">import</span> <span class="n">PY2</span>
+<span class="k">if</span> <span class="n">PY2</span><span class="p">:</span>
+    <span class="nb">str</span> <span class="o">=</span> <span class="n">unicode</span>
+    
+<span class="kn">import</span> <span class="nn">labscript_utils.h5_lock</span><span class="o">,</span> <span class="nn">h5py</span>
+<span class="kn">import</span> <span class="nn">pandas</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">tzlocal</span>
+<span class="kn">import</span> <span class="nn">labscript_utils.shared_drive</span>
+<span class="kn">from</span> <span class="nn">labscript_utils.dict_diff</span> <span class="kn">import</span> <span class="n">dict_diff</span>
+<span class="kn">from</span> <span class="nn">labscript_utils.connections</span> <span class="kn">import</span> <span class="n">_ensure_str</span>
+<span class="kn">from</span> <span class="nn">labscript_utils.properties</span> <span class="kn">import</span> <span class="n">get_attributes</span>
+<span class="kn">import</span> <span class="nn">runmanager</span>
+
+
+<div class="viewcode-block" id="asdatetime"><a class="viewcode-back" href="../../api/lyse.html#lyse.dataframe_utilities.asdatetime">[docs]</a><span class="k">def</span> <span class="nf">asdatetime</span><span class="p">(</span><span class="n">timestr</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">timestr</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">):</span>
+        <span class="n">timestr</span> <span class="o">=</span> <span class="n">timestr</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+    <span class="n">tz</span> <span class="o">=</span> <span class="n">tzlocal</span><span class="o">.</span><span class="n">get_localzone</span><span class="p">()</span><span class="o">.</span><span class="n">zone</span>
+    <span class="k">return</span> <span class="n">pandas</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">timestr</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="n">tz</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="get_nested_dict_from_shot"><a class="viewcode-back" href="../../api/lyse.html#lyse.dataframe_utilities.get_nested_dict_from_shot">[docs]</a><span class="k">def</span> <span class="nf">get_nested_dict_from_shot</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="n">runmanager</span><span class="o">.</span><span class="n">get_shot_globals</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5_file</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s1">&#39;results&#39;</span> <span class="ow">in</span> <span class="n">h5_file</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">groupname</span> <span class="ow">in</span> <span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]:</span>
+                <span class="n">resultsgroup</span> <span class="o">=</span> <span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">][</span><span class="n">groupname</span><span class="p">]</span>
+                <span class="n">row</span><span class="p">[</span><span class="n">groupname</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_attributes</span><span class="p">(</span><span class="n">resultsgroup</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;images&#39;</span> <span class="ow">in</span> <span class="n">h5_file</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">orientation</span> <span class="ow">in</span> <span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;images&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;images&#39;</span><span class="p">][</span><span class="n">orientation</span><span class="p">],</span> <span class="n">h5py</span><span class="o">.</span><span class="n">Group</span><span class="p">):</span>
+                    <span class="n">row</span><span class="p">[</span><span class="n">orientation</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_attributes</span><span class="p">(</span><span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;images&#39;</span><span class="p">][</span><span class="n">orientation</span><span class="p">])</span>
+                    <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;images&#39;</span><span class="p">][</span><span class="n">orientation</span><span class="p">]:</span>
+                        <span class="n">row</span><span class="p">[</span><span class="n">orientation</span><span class="p">][</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                        <span class="n">group</span> <span class="o">=</span> <span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;images&#39;</span><span class="p">][</span><span class="n">orientation</span><span class="p">][</span><span class="n">label</span><span class="p">]</span>
+                        <span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">group</span><span class="p">:</span>
+                            <span class="n">row</span><span class="p">[</span><span class="n">orientation</span><span class="p">][</span><span class="n">label</span><span class="p">][</span><span class="n">image</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">get_attributes</span><span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="n">image</span><span class="p">])</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                                <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">h5py</span><span class="o">.</span><span class="n">Reference</span><span class="p">):</span>
+                                    <span class="n">row</span><span class="p">[</span><span class="n">orientation</span><span class="p">][</span><span class="n">label</span><span class="p">][</span><span class="n">image</span><span class="p">][</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="n">row</span><span class="p">[</span><span class="s1">&#39;filepath&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_ensure_str</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+        <span class="n">row</span><span class="p">[</span><span class="s1">&#39;agnostic_path&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">labscript_utils</span><span class="o">.</span><span class="n">shared_drive</span><span class="o">.</span><span class="n">path_to_agnostic</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+        <span class="n">seq_id</span> <span class="o">=</span> <span class="n">_ensure_str</span><span class="p">(</span><span class="n">h5_file</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;sequence_id&#39;</span><span class="p">])</span>
+        <span class="n">row</span><span class="p">[</span><span class="s1">&#39;sequence&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">asdatetime</span><span class="p">(</span><span class="n">seq_id</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">row</span><span class="p">[</span><span class="s1">&#39;sequence_index&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">h5_file</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;sequence_index&#39;</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="n">row</span><span class="p">[</span><span class="s1">&#39;sequence_index&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="s1">&#39;script&#39;</span> <span class="ow">in</span> <span class="n">h5_file</span><span class="p">:</span> 
+            <span class="n">row</span><span class="p">[</span><span class="s1">&#39;labscript&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_ensure_str</span><span class="p">(</span><span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;script&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">row</span><span class="p">[</span><span class="s1">&#39;run time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">asdatetime</span><span class="p">(</span><span class="n">_ensure_str</span><span class="p">(</span><span class="n">h5_file</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;run time&#39;</span><span class="p">]))</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="n">row</span><span class="p">[</span><span class="s1">&#39;run time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;nan&#39;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>    
+            <span class="n">row</span><span class="p">[</span><span class="s1">&#39;run number&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">h5_file</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;run number&#39;</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="n">row</span><span class="p">[</span><span class="s1">&#39;run number&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;nan&#39;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">row</span><span class="p">[</span><span class="s1">&#39;run repeat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">h5_file</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;run repeat&#39;</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="n">row</span><span class="p">[</span><span class="s1">&#39;run repeat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="n">row</span></div>
+            
+<div class="viewcode-block" id="flatten_dict"><a class="viewcode-back" href="../../api/lyse.html#lyse.dataframe_utilities.flatten_dict">[docs]</a><span class="k">def</span> <span class="nf">flatten_dict</span><span class="p">(</span><span class="n">dictionary</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="nb">tuple</span><span class="p">()):</span>
+    <span class="sd">&quot;&quot;&quot;Takes a nested dictionary whose keys are strings, and returns a</span>
+<span class="sd">    flat dictionary whose keys are tuples of strings, each element of</span>
+<span class="sd">    which is the key for one level of the hierarchy.&quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="n">name</span><span class="p">],</span><span class="nb">dict</span><span class="p">):</span>
+            <span class="n">flat</span> <span class="o">=</span> <span class="n">flatten_dict</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="n">name</span><span class="p">],</span><span class="n">keys</span><span class="o">=</span><span class="n">keys</span> <span class="o">+</span> <span class="p">(</span><span class="n">name</span><span class="p">,))</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">flat</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">[</span><span class="n">keys</span> <span class="o">+</span> <span class="p">(</span><span class="n">name</span><span class="p">,)]</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+            
+<div class="viewcode-block" id="flat_dict_to_hierarchical_dataframe"><a class="viewcode-back" href="../../api/lyse.html#lyse.dataframe_utilities.flat_dict_to_hierarchical_dataframe">[docs]</a><span class="k">def</span> <span class="nf">flat_dict_to_hierarchical_dataframe</span><span class="p">(</span><span class="n">dictionary</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Make all the keys tuples of the same length&quot;&quot;&quot;</span>
+    <span class="n">max_tuple_length</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># Must have at least two levels to make a MultiIndex</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+        <span class="n">max_tuple_length</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_tuple_length</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+        <span class="n">newkey</span> <span class="o">=</span> <span class="n">key</span><span class="p">[:]</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">newkey</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">max_tuple_length</span><span class="p">:</span>
+            <span class="n">newkey</span> <span class="o">+=</span> <span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,)</span>
+        <span class="n">result</span><span class="p">[</span><span class="n">newkey</span><span class="p">]</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>    
+    <span class="n">index</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_tuples</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+    <span class="k">return</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">result</span><span class="p">],</span><span class="n">columns</span><span class="o">=</span><span class="n">index</span><span class="p">)</span>  </div>
+
+<div class="viewcode-block" id="flat_dict_to_flat_series"><a class="viewcode-back" href="../../api/lyse.html#lyse.dataframe_utilities.flat_dict_to_flat_series">[docs]</a><span class="k">def</span> <span class="nf">flat_dict_to_flat_series</span><span class="p">(</span><span class="n">dictionary</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">[</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+    <span class="n">keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="n">keys</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">item</span><span class="p">:</span> 
+        <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">),)</span> <span class="o">+</span> <span class="n">item</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="k">else</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">item</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">pandas</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="n">keys</span><span class="p">)</span>  </div>
+          
+<div class="viewcode-block" id="get_dataframe_from_shot"><a class="viewcode-back" href="../../api/lyse.html#lyse.dataframe_utilities.get_dataframe_from_shot">[docs]</a><span class="k">def</span> <span class="nf">get_dataframe_from_shot</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+    <span class="n">nested_dict</span> <span class="o">=</span> <span class="n">get_nested_dict_from_shot</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+    <span class="n">flat_dict</span> <span class="o">=</span>  <span class="n">flatten_dict</span><span class="p">(</span><span class="n">nested_dict</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">flat_dict_to_hierarchical_dataframe</span><span class="p">(</span><span class="n">flat_dict</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span></div>
+    
+<div class="viewcode-block" id="get_dataframe_from_shots"><a class="viewcode-back" href="../../api/lyse.html#lyse.dataframe_utilities.get_dataframe_from_shots">[docs]</a><span class="k">def</span> <span class="nf">get_dataframe_from_shots</span><span class="p">(</span><span class="n">filepaths</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">concat_with_padding</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">get_dataframe_from_shot</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span> <span class="k">for</span> <span class="n">filepath</span> <span class="ow">in</span> <span class="n">filepaths</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="get_series_from_shot"><a class="viewcode-back" href="../../api/lyse.html#lyse.dataframe_utilities.get_series_from_shot">[docs]</a><span class="k">def</span> <span class="nf">get_series_from_shot</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+    <span class="n">nested_dict</span> <span class="o">=</span> <span class="n">get_nested_dict_from_shot</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+    <span class="n">flat_dict</span> <span class="o">=</span>  <span class="n">flatten_dict</span><span class="p">(</span><span class="n">nested_dict</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">flat_dict_to_flat_series</span><span class="p">(</span><span class="n">flat_dict</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">s</span></div>
+    
+<div class="viewcode-block" id="pad_columns"><a class="viewcode-back" href="../../api/lyse.html#lyse.dataframe_utilities.pad_columns">[docs]</a><span class="k">def</span> <span class="nf">pad_columns</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Add depth to hiererchical column labels with empty strings&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">nlevels</span> <span class="o">==</span> <span class="n">n</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">df</span>
+    <span class="n">new_columns</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="n">new_column</span> <span class="o">=</span> <span class="n">column</span> <span class="o">+</span> <span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,)</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">column</span><span class="p">))</span>
+        <span class="n">new_columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_column</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="n">new_column</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_tuples</span><span class="p">(</span><span class="n">new_columns</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">columns</span> <span class="o">=</span> <span class="n">index</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="concat_with_padding"><a class="viewcode-back" href="../../api/lyse.html#lyse.dataframe_utilities.concat_with_padding">[docs]</a><span class="k">def</span> <span class="nf">concat_with_padding</span><span class="p">(</span><span class="o">*</span><span class="n">dataframes</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Concatenates dataframes with MultiIndex column labels,</span>
+<span class="sd">    padding shallower hierarchies such that the MultiIndexes have</span>
+<span class="sd">    the same nlevels.&quot;&quot;&quot;</span>
+    <span class="n">dataframes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">dataframes</span><span class="p">)</span>
+    <span class="n">max_nlevels</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">nlevels</span> <span class="k">for</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">dataframes</span><span class="p">)</span>
+    <span class="c1"># Remove empty dataframes (these don&#39;t concat since pandas 0.18) </span>
+    <span class="n">dataframes</span> <span class="o">=</span> <span class="p">[</span><span class="n">df</span> <span class="k">for</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">dataframes</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">df</span><span class="o">.</span><span class="n">empty</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">df</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dataframes</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">nlevels</span> <span class="o">&lt;</span> <span class="n">max_nlevels</span><span class="p">:</span>
+            <span class="n">dataframes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">pad_columns</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">max_nlevels</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pandas</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">dataframes</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="replace_with_padding"><a class="viewcode-back" href="../../api/lyse.html#lyse.dataframe_utilities.replace_with_padding">[docs]</a><span class="k">def</span> <span class="nf">replace_with_padding</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">nlevels</span> <span class="o">&lt;</span> <span class="n">row</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">nlevels</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pad_columns</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">nlevels</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">nlevels</span> <span class="o">&gt;</span> <span class="n">row</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">nlevels</span><span class="p">:</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="n">pad_columns</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">nlevels</span><span class="p">)</span>
+
+    <span class="c1"># Change the index of the row object to equal that of where it is to be</span>
+    <span class="c1"># inserted:</span>
+    <span class="n">row</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">Int64Index</span><span class="p">([</span><span class="n">index</span><span class="p">])</span>
+
+    <span class="c1"># Replace the target row in the dataframe by dropping, appending, then</span>
+    <span class="c1"># sorting by index:</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="n">index</span><span class="p">])</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">df</span></div>
+    
+
+    
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, labscript suite
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+lyse package
+============
+
+Submodules
+----------
+
+lyse.analysis\_subprocess module
+--------------------------------
+
+.. automodule:: lyse.analysis_subprocess
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+lyse.dataframe\_utilities module
+--------------------------------
+
+.. automodule:: lyse.dataframe_utilities
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+lyse.figure\_manager module
+---------------------------
+
+.. automodule:: lyse.figure_manager
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+lyse.tempfile2clipboard module
+------------------------------
+
+.. automodule:: lyse.tempfile2clipboard
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: lyse
+   :members:
+   :undoc-members:
+   :show-inheritance:

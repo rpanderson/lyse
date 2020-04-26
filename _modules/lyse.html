@@ -1,0 +1,721 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>lyse &mdash; lyse testing documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/lyse.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> lyse
+          
+
+          
+            
+            <img src="../_static/lyse.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                testing
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releases.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://labscriptsuite.org">Home</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/labscript-suite/lyse">Source Code</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">lyse</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Module code</a> &raquo;</li>
+        
+      <li>lyse</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for lyse</h1><div class="highlight"><pre>
+<span></span><span class="c1">#####################################################################</span>
+<span class="c1">#                                                                   #</span>
+<span class="c1"># /__init__.py                                                      #</span>
+<span class="c1">#                                                                   #</span>
+<span class="c1"># Copyright 2013, Monash University                                 #</span>
+<span class="c1">#                                                                   #</span>
+<span class="c1"># This file is part of the program lyse, in the labscript suite     #</span>
+<span class="c1"># (see http://labscriptsuite.org), and is licensed under the        #</span>
+<span class="c1"># Simplified BSD License. See the license.txt file in the root of   #</span>
+<span class="c1"># the project for the full license.                                 #</span>
+<span class="c1">#                                                                   #</span>
+<span class="c1">#####################################################################</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span>
+    
+<span class="kn">from</span> <span class="nn">lyse.dataframe_utilities</span> <span class="kn">import</span> <span class="n">get_series_from_shot</span> <span class="k">as</span> <span class="n">_get_singleshot</span><span class="p">,</span> <span class="n">dict_diff</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">socket</span>
+<span class="kn">import</span> <span class="nn">pickle</span> <span class="k">as</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">inspect</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+
+<span class="kn">import</span> <span class="nn">labscript_utils.h5_lock</span><span class="o">,</span> <span class="nn">h5py</span>
+<span class="kn">from</span> <span class="nn">labscript_utils.labconfig</span> <span class="kn">import</span> <span class="n">LabConfig</span>
+<span class="kn">import</span> <span class="nn">pandas</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">array</span><span class="p">,</span> <span class="n">ndarray</span>
+<span class="kn">import</span> <span class="nn">types</span>
+
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;2.6.0&#39;</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">labscript_utils</span> <span class="kn">import</span> <span class="n">check_version</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s1">&#39;Require labscript_utils &gt; 2.1.0&#39;</span><span class="p">)</span>
+
+<span class="n">check_version</span><span class="p">(</span><span class="s1">&#39;pandas&#39;</span><span class="p">,</span> <span class="s1">&#39;0.21.0&#39;</span><span class="p">,</span> <span class="s1">&#39;2.0&#39;</span><span class="p">)</span>
+<span class="n">check_version</span><span class="p">(</span><span class="s1">&#39;zprocess&#39;</span><span class="p">,</span> <span class="s1">&#39;2.2.0&#39;</span><span class="p">,</span> <span class="s1">&#39;3.0&#39;</span><span class="p">)</span>
+<span class="n">check_version</span><span class="p">(</span><span class="s1">&#39;labscript_utils&#39;</span><span class="p">,</span> <span class="s1">&#39;2.14.0&#39;</span><span class="p">,</span> <span class="s1">&#39;3.0&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">labscript_utils</span> <span class="kn">import</span> <span class="n">PY2</span><span class="p">,</span> <span class="n">dedent</span>
+<span class="kn">from</span> <span class="nn">labscript_utils.ls_zprocess</span> <span class="kn">import</span> <span class="n">zmq_get</span>
+<span class="k">if</span> <span class="n">PY2</span><span class="p">:</span>
+    <span class="nb">str</span> <span class="o">=</span> <span class="n">unicode</span>
+
+
+<span class="kn">from</span> <span class="nn">labscript_utils</span> <span class="kn">import</span> <span class="n">labscript_suite_install_dir</span>
+<span class="kn">from</span> <span class="nn">labscript_utils.properties</span> <span class="kn">import</span> <span class="n">get_attributes</span><span class="p">,</span> <span class="n">get_attribute</span><span class="p">,</span> <span class="n">set_attributes</span>
+<span class="k">if</span> <span class="n">labscript_suite_install_dir</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">LYSE_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">labscript_suite_install_dir</span><span class="p">,</span> <span class="s1">&#39;lyse&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># No labscript install directory found? Fall back to relying on __file__</span>
+    <span class="n">LYSE_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">LYSE_DIR</span><span class="p">):</span>
+    <span class="c1"># Don&#39;t want to continue if we have not found the directory:</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Cannot locate the directory lyse is installed in.&quot;</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+
+<span class="c1"># If running stand-alone, and not from within lyse, the below two variables</span>
+<span class="c1"># will be as follows. Otherwise lyse will override them with spinning_top =</span>
+<span class="c1"># True and path &lt;name of hdf5 file being analysed&gt;:</span>
+<span class="n">spinning_top</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="c1"># data to be sent back to the lyse GUI if running within lyse</span>
+<span class="n">_updated_data</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="c1"># dictionary of plot id&#39;s to classes to use for Plot object</span>
+<span class="n">_plot_classes</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="c1"># A fake Plot object to subclass if we are not running in the GUI</span>
+<span class="n">Plot</span><span class="o">=</span><span class="nb">object</span>
+<span class="c1"># An empty dictionary of plots (overwritten by the analysis worker if running within lyse)</span>
+<span class="n">plots</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="c1"># A threading.Event to delay the </span>
+<span class="n">delay_event</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Event</span><span class="p">()</span>
+<span class="c1"># a flag to determine whether we should wait for the delay event</span>
+<span class="n">_delay_flag</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="c1"># get port that lyse is using for communication</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">_labconfig</span> <span class="o">=</span> <span class="n">LabConfig</span><span class="p">(</span><span class="n">required_params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;ports&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;lyse&quot;</span><span class="p">]})</span>
+    <span class="n">_lyse_port</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">_labconfig</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ports&#39;</span><span class="p">,</span> <span class="s1">&#39;lyse&#39;</span><span class="p">))</span>
+<span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+    <span class="n">_lyse_port</span> <span class="o">=</span> <span class="mi">42519</span>
+
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<span class="k">class</span> <span class="nc">_RoutineStorage</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;An empty object that analysis routines can store data in. It will</span>
+<span class="sd">    persist from one run of an analysis routine to the next when the routine</span>
+<span class="sd">    is being run from within lyse. No attempt is made to store data to disk,</span>
+<span class="sd">    so if the routine is run multiple times from the command line instead of</span>
+<span class="sd">    from lyse, or the lyse analysis subprocess is restarted, data will not be</span>
+<span class="sd">    retained. An alternate method should be used to store data if desired in</span>
+<span class="sd">    these cases.&quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+
+<span class="n">routine_storage</span> <span class="o">=</span> <span class="n">_RoutineStorage</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="data"><a class="viewcode-back" href="../api/lyse.html#lyse.data">[docs]</a><span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="n">filepath</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">_lyse_port</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">filepath</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_get_singleshot</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">zmq_get</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="s1">&#39;get dataframe&#39;</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">padding</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,)</span><span class="o">*</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">nlevels</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">integer_indexing</span> <span class="o">=</span> <span class="n">_labconfig</span><span class="o">.</span><span class="n">getboolean</span><span class="p">(</span><span class="s1">&#39;lyse&#39;</span><span class="p">,</span> <span class="s1">&#39;integer_indexing&#39;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="p">(</span><span class="n">LabConfig</span><span class="o">.</span><span class="n">NoOptionError</span><span class="p">,</span> <span class="n">LabConfig</span><span class="o">.</span><span class="n">NoSectionError</span><span class="p">):</span>
+                <span class="n">integer_indexing</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="n">integer_indexing</span><span class="p">:</span>
+                <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;sequence_index&#39;</span><span class="p">,</span> <span class="s1">&#39;run number&#39;</span><span class="p">,</span> <span class="s1">&#39;run repeat&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">([(</span><span class="s1">&#39;sequence&#39;</span><span class="p">,)</span> <span class="o">+</span> <span class="n">padding</span><span class="p">,(</span><span class="s1">&#39;run time&#39;</span><span class="p">,)</span> <span class="o">+</span> <span class="n">padding</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;sequence&#39;</span><span class="p">,</span> <span class="s1">&#39;run time&#39;</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="c1"># Empty DataFrame or index column not found, so fall back to RangeIndex instead</span>
+            <span class="k">pass</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">df</span></div>
+        
+<div class="viewcode-block" id="globals_diff"><a class="viewcode-back" href="../api/lyse.html#lyse.globals_diff">[docs]</a><span class="k">def</span> <span class="nf">globals_diff</span><span class="p">(</span><span class="n">run1</span><span class="p">,</span> <span class="n">run2</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">dict_diff</span><span class="p">(</span><span class="n">run1</span><span class="o">.</span><span class="n">get_globals</span><span class="p">(</span><span class="n">group</span><span class="p">),</span> <span class="n">run2</span><span class="o">.</span><span class="n">get_globals</span><span class="p">(</span><span class="n">group</span><span class="p">))</span></div>
+ 
+<div class="viewcode-block" id="Run"><a class="viewcode-back" href="../api/lyse.html#lyse.Run">[docs]</a><span class="k">class</span> <span class="nc">Run</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">h5_path</span><span class="p">,</span><span class="n">no_write</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">no_write</span> <span class="o">=</span> <span class="n">no_write</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">h5_path</span> <span class="o">=</span> <span class="n">h5_path</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">no_write</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">h5_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5_file</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="s1">&#39;results&#39;</span> <span class="ow">in</span> <span class="n">h5_file</span><span class="p">:</span>
+                     <span class="n">h5_file</span><span class="o">.</span><span class="n">create_group</span><span class="p">(</span><span class="s1">&#39;results&#39;</span><span class="p">)</span>
+                     
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">no_write</span><span class="p">:</span>
+                <span class="c1"># The group were this run&#39;s results will be stored in the h5 file</span>
+                <span class="c1"># will be the name of the python script which is instantiating</span>
+                <span class="c1"># this Run object:</span>
+                <span class="n">frame</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">currentframe</span><span class="p">()</span>
+                <span class="vm">__file__</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_back</span><span class="o">.</span><span class="n">f_globals</span><span class="p">[</span><span class="s1">&#39;__file__&#39;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">PY2</span><span class="p">:</span>
+                    <span class="vm">__file__</span> <span class="o">=</span> <span class="vm">__file__</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">getfilesystemencoding</span><span class="p">())</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">group</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.py&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">h5_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5_file</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">group</span> <span class="ow">in</span> <span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]:</span>
+                         <span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">create_group</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="c1"># sys.stderr.write(&#39;Warning: to write results, call &#39;</span>
+            <span class="c1"># &#39;Run.set_group(groupname), specifying the name of the group &#39;</span>
+            <span class="c1"># &#39;you would like to save results to. This normally comes from &#39;</span>
+            <span class="c1"># &#39;the filename of your script, but since you\&#39;re in interactive &#39;</span>
+            <span class="c1"># &#39;mode, there is no scipt name. Opening in read only mode for &#39;</span>
+            <span class="c1"># &#39;the moment.\n&#39;)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">no_write</span> <span class="o">=</span> <span class="kc">True</span>
+            
+<div class="viewcode-block" id="Run.set_group"><a class="viewcode-back" href="../api/lyse.html#lyse.Run.set_group">[docs]</a>    <span class="k">def</span> <span class="nf">set_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">groupname</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">group</span> <span class="o">=</span> <span class="n">groupname</span>
+        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h5_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5_file</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">group</span> <span class="ow">in</span> <span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]:</span>
+                 <span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">create_group</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">no_write</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="Run.trace_names"><a class="viewcode-back" href="../api/lyse.html#lyse.Run.trace_names">[docs]</a>    <span class="k">def</span> <span class="nf">trace_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h5_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5_file</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;traces&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">[]</span></div>
+                
+<div class="viewcode-block" id="Run.get_attrs"><a class="viewcode-back" href="../api/lyse.html#lyse.Run.get_attrs">[docs]</a>    <span class="k">def</span> <span class="nf">get_attrs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns all attributes of the specified group as a dictionary.&quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h5_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5_file</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">h5_file</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;The group </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1"> does not exist&#39;</span><span class="o">%</span><span class="n">group</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">get_attributes</span><span class="p">(</span><span class="n">h5_file</span><span class="p">[</span><span class="n">group</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="Run.get_trace"><a class="viewcode-back" href="../api/lyse.html#lyse.Run.get_trace">[docs]</a>    <span class="k">def</span> <span class="nf">get_trace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h5_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5_file</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;traces&#39;</span><span class="p">]:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;The trace </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1"> doesn not exist&#39;</span><span class="o">%</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">trace</span> <span class="o">=</span> <span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;traces&#39;</span><span class="p">][</span><span class="n">name</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">trace</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">],</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">),</span><span class="n">array</span><span class="p">(</span><span class="n">trace</span><span class="p">[</span><span class="s1">&#39;values&#39;</span><span class="p">],</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>         </div>
+
+<div class="viewcode-block" id="Run.get_result_array"><a class="viewcode-back" href="../api/lyse.html#lyse.Run.get_result_array">[docs]</a>    <span class="k">def</span> <span class="nf">get_result_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">group</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h5_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5_file</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;The result group </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1"> doesn not exist&#39;</span><span class="o">%</span><span class="n">group</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">][</span><span class="n">group</span><span class="p">]:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;The result array </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1"> doesn not exist&#39;</span><span class="o">%</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">][</span><span class="n">group</span><span class="p">][</span><span class="n">name</span><span class="p">])</span></div>
+            
+<div class="viewcode-block" id="Run.get_result"><a class="viewcode-back" href="../api/lyse.html#lyse.Run.get_result">[docs]</a>    <span class="k">def</span> <span class="nf">get_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return &#39;result&#39; in &#39;results/group&#39; that was saved by </span>
+<span class="sd">        the save_result() method.&quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h5_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5_file</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;The result group </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1"> does not exist&#39;</span><span class="o">%</span><span class="n">group</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">][</span><span class="n">group</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;The result </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1"> does not exist&#39;</span><span class="o">%</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">get_attribute</span><span class="p">(</span><span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">][</span><span class="n">group</span><span class="p">],</span> <span class="n">name</span><span class="p">)</span></div>
+            
+<div class="viewcode-block" id="Run.get_results"><a class="viewcode-back" href="../api/lyse.html#lyse.Run.get_results">[docs]</a>    <span class="k">def</span> <span class="nf">get_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="o">*</span><span class="n">names</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Iteratively call get_result(group,name) for each name provided.</span>
+<span class="sd">        Returns a list of all results in same order as names provided.&quot;&quot;&quot;</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+            <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_result</span><span class="p">(</span><span class="n">group</span><span class="p">,</span><span class="n">name</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">results</span>        </div>
+            
+<div class="viewcode-block" id="Run.save_result"><a class="viewcode-back" href="../api/lyse.html#lyse.Run.save_result">[docs]</a>    <span class="k">def</span> <span class="nf">save_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Save a result to h5 file. Defaults are to save to the active group </span>
+<span class="sd">        in the &#39;results&#39; group and overwrite an existing result.</span>
+<span class="sd">        Note that the result is saved as an attribute of &#39;results/group&#39; and</span>
+<span class="sd">        overwriting attributes causes h5 file size bloat.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">no_write</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;This run is read-only. &#39;</span>
+                            <span class="s1">&#39;You can</span><span class="se">\&#39;</span><span class="s1">t save results to runs through a &#39;</span>
+                            <span class="s1">&#39;Sequence object. Per-run analysis should be done &#39;</span>
+                            <span class="s1">&#39;in single-shot analysis routines, in which a &#39;</span>
+                            <span class="s1">&#39;single Run object is used&#39;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h5_path</span><span class="p">,</span><span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5_file</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">group</span><span class="p">:</span>
+                <span class="c1"># Save to analysis results group by default</span>
+                <span class="n">group</span> <span class="o">=</span> <span class="s1">&#39;results/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">group</span>
+            <span class="k">elif</span> <span class="ow">not</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">h5_file</span><span class="p">:</span>
+                <span class="c1"># Create the group if it doesn&#39;t exist</span>
+                <span class="n">h5_file</span><span class="o">.</span><span class="n">create_group</span><span class="p">(</span><span class="n">group</span><span class="p">)</span> 
+            <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">h5_file</span><span class="p">[</span><span class="n">group</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">overwrite</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Attribute </span><span class="si">%s</span><span class="s1"> exists in group </span><span class="si">%s</span><span class="s1">. &#39;</span> \
+                                <span class="s1">&#39;Use overwrite=True to overwrite.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">group</span><span class="p">))</span>                   
+            <span class="n">set_attributes</span><span class="p">(</span><span class="n">h5_file</span><span class="p">[</span><span class="n">group</span><span class="p">],</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="n">value</span><span class="p">})</span>
+            
+        <span class="k">if</span> <span class="n">spinning_top</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">h5_path</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_updated_data</span><span class="p">:</span>
+                <span class="n">_updated_data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">h5_path</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">if</span> <span class="n">group</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;results&#39;</span><span class="p">):</span>
+                <span class="n">toplevel</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;results/&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">_updated_data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">h5_path</span><span class="p">][</span><span class="n">toplevel</span><span class="p">,</span> <span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span></div>
+
+<div class="viewcode-block" id="Run.save_result_array"><a class="viewcode-back" href="../api/lyse.html#lyse.Run.save_result_array">[docs]</a>    <span class="k">def</span> <span class="nf">save_result_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+                          <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">keep_attrs</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Save data array to h5 file. Defaults are to save to the active </span>
+<span class="sd">        group in the &#39;results&#39; group and overwrite existing data.</span>
+<span class="sd">        Additional keyword arguments are passed directly to h5py.create_dataset().&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">no_write</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;This run is read-only. &#39;</span>
+                            <span class="s1">&#39;You can</span><span class="se">\&#39;</span><span class="s1">t save results to runs through a &#39;</span>
+                            <span class="s1">&#39;Sequence object. Per-run analysis should be done &#39;</span>
+                            <span class="s1">&#39;in single-shot analysis routines, in which a &#39;</span>
+                            <span class="s1">&#39;single Run object is used&#39;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h5_path</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5_file</span><span class="p">:</span>
+            <span class="n">attrs</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">group</span><span class="p">:</span>
+                <span class="c1"># Save dataset to results group by default</span>
+                <span class="n">group</span> <span class="o">=</span> <span class="s1">&#39;results/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">group</span>
+            <span class="k">elif</span> <span class="ow">not</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">h5_file</span><span class="p">:</span>
+                <span class="c1"># Create the group if it doesn&#39;t exist</span>
+                <span class="n">h5_file</span><span class="o">.</span><span class="n">create_group</span><span class="p">(</span><span class="n">group</span><span class="p">)</span> 
+            <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">h5_file</span><span class="p">[</span><span class="n">group</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">overwrite</span><span class="p">:</span>
+                    <span class="c1"># Overwrite if dataset already exists</span>
+                    <span class="k">if</span> <span class="n">keep_attrs</span><span class="p">:</span>
+                        <span class="n">attrs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">h5_file</span><span class="p">[</span><span class="n">group</span><span class="p">][</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
+                    <span class="k">del</span> <span class="n">h5_file</span><span class="p">[</span><span class="n">group</span><span class="p">][</span><span class="n">name</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Dataset </span><span class="si">%s</span><span class="s1"> exists. Use overwrite=True to overwrite.&#39;</span> <span class="o">%</span> 
+                                     <span class="n">group</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">name</span><span class="p">)</span>
+            <span class="n">h5_file</span><span class="p">[</span><span class="n">group</span><span class="p">]</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">attrs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">h5_file</span><span class="p">[</span><span class="n">group</span><span class="p">][</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span></div>
+
+<div class="viewcode-block" id="Run.get_traces"><a class="viewcode-back" href="../api/lyse.html#lyse.Run.get_traces">[docs]</a>    <span class="k">def</span> <span class="nf">get_traces</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">names</span><span class="p">):</span>
+        <span class="n">traces</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+            <span class="n">traces</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_trace</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">traces</span></div>
+             
+<div class="viewcode-block" id="Run.get_result_arrays"><a class="viewcode-back" href="../api/lyse.html#lyse.Run.get_result_arrays">[docs]</a>    <span class="k">def</span> <span class="nf">get_result_arrays</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="o">*</span><span class="n">names</span><span class="p">):</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+            <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_result_array</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">results</span></div>
+        
+<div class="viewcode-block" id="Run.save_results"><a class="viewcode-back" href="../api/lyse.html#lyse.Run.save_results">[docs]</a>    <span class="k">def</span> <span class="nf">save_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Iteratively call save_result() on multiple results.</span>
+<span class="sd">        Assumes arguments are ordered such that each result to be saved is</span>
+<span class="sd">        preceeded by the name of the attribute to save it under.</span>
+<span class="sd">        Keywords arguments are passed to each call of save_result().&quot;&quot;&quot;</span>
+        <span class="n">names</span> <span class="o">=</span> <span class="n">args</span><span class="p">[::</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;saving </span><span class="si">%s</span><span class="s1"> =&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">save_result</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+            
+<div class="viewcode-block" id="Run.save_results_dict"><a class="viewcode-back" href="../api/lyse.html#lyse.Run.save_results_dict">[docs]</a>    <span class="k">def</span> <span class="nf">save_results_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">results_dict</span><span class="p">,</span> <span class="n">uncertainties</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">results_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">uncertainties</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">save_result</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">save_result</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">save_result</span><span class="p">(</span><span class="s1">&#39;u_&#39;</span> <span class="o">+</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Run.save_result_arrays"><a class="viewcode-back" href="../api/lyse.html#lyse.Run.save_result_arrays">[docs]</a>    <span class="k">def</span> <span class="nf">save_result_arrays</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Iteratively call save_result_array() on multiple data sets. </span>
+<span class="sd">        Assumes arguments are ordered such that each dataset to be saved is </span>
+<span class="sd">        preceeded by the name to save it as. </span>
+<span class="sd">        All keyword arguments are passed to each call of save_result_array().&quot;&quot;&quot;</span>
+        <span class="n">names</span> <span class="o">=</span> <span class="n">args</span><span class="p">[::</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">save_result_array</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="Run.get_image"><a class="viewcode-back" href="../api/lyse.html#lyse.Run.get_image">[docs]</a>    <span class="k">def</span> <span class="nf">get_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">orientation</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">image</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h5_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5_file</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="s1">&#39;images&#39;</span> <span class="ow">in</span> <span class="n">h5_file</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;File does not contain any images&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">orientation</span> <span class="ow">in</span> <span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;images&#39;</span><span class="p">]:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;File does not contain any images with orientation </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="o">%</span><span class="n">orientation</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;images&#39;</span><span class="p">][</span><span class="n">orientation</span><span class="p">]:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;File does not contain any images with label </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="o">%</span><span class="n">label</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;images&#39;</span><span class="p">][</span><span class="n">orientation</span><span class="p">][</span><span class="n">label</span><span class="p">]:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Image </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1"> not found in file&#39;</span><span class="o">%</span><span class="n">image</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;images&#39;</span><span class="p">][</span><span class="n">orientation</span><span class="p">][</span><span class="n">label</span><span class="p">][</span><span class="n">image</span><span class="p">])</span></div>
+    
+<div class="viewcode-block" id="Run.get_images"><a class="viewcode-back" href="../api/lyse.html#lyse.Run.get_images">[docs]</a>    <span class="k">def</span> <span class="nf">get_images</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">orientation</span><span class="p">,</span><span class="n">label</span><span class="p">,</span> <span class="o">*</span><span class="n">images</span><span class="p">):</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">images</span><span class="p">:</span>
+            <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_image</span><span class="p">(</span><span class="n">orientation</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">image</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">results</span></div>
+        
+<div class="viewcode-block" id="Run.get_all_image_labels"><a class="viewcode-back" href="../api/lyse.html#lyse.Run.get_all_image_labels">[docs]</a>    <span class="k">def</span> <span class="nf">get_all_image_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">images_list</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h5_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5_file</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">orientation</span> <span class="ow">in</span> <span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;/images&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">images_list</span><span class="p">[</span><span class="n">orientation</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;/images&#39;</span><span class="p">][</span><span class="n">orientation</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>               
+        <span class="k">return</span> <span class="n">images_list</span>                </div>
+    
+<div class="viewcode-block" id="Run.get_image_attributes"><a class="viewcode-back" href="../api/lyse.html#lyse.Run.get_image_attributes">[docs]</a>    <span class="k">def</span> <span class="nf">get_image_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orientation</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h5_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5_file</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="s1">&#39;images&#39;</span> <span class="ow">in</span> <span class="n">h5_file</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;File does not contain any images&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">orientation</span> <span class="ow">in</span> <span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;images&#39;</span><span class="p">]:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;File does not contain any images with orientation </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="o">%</span><span class="n">orientation</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">get_attributes</span><span class="p">(</span><span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;images&#39;</span><span class="p">][</span><span class="n">orientation</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="Run.get_globals"><a class="viewcode-back" href="../api/lyse.html#lyse.Run.get_globals">[docs]</a>    <span class="k">def</span> <span class="nf">get_globals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">group</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">group</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h5_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5_file</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;globals&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h5_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5_file</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;globals&#39;</span><span class="p">][</span><span class="n">group</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">{}</span></div>
+
+<div class="viewcode-block" id="Run.get_globals_raw"><a class="viewcode-back" href="../api/lyse.html#lyse.Run.get_globals_raw">[docs]</a>    <span class="k">def</span> <span class="nf">get_globals_raw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">globals_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h5_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5_file</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">group</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;globals&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                    <span class="n">temp_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">temp_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                        <span class="n">globals_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">globals_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;globals&#39;</span><span class="p">][</span><span class="n">group</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">globals_dict</span></div>
+        
+    <span class="c1"># def iterable_globals(self, group=None):</span>
+        <span class="c1"># raw_globals = self.get_globals_raw(group)</span>
+        <span class="c1"># print raw_globals.items()</span>
+        <span class="c1"># iterable_globals = {}</span>
+        <span class="c1"># for global_name, expression in raw_globals.items():</span>
+            <span class="c1"># print expression</span>
+            <span class="c1"># # try:</span>
+                <span class="c1"># # sandbox = {}</span>
+                <span class="c1"># # exec(&#39;from pylab import *&#39;,sandbox,sandbox)</span>
+                <span class="c1"># # exec(&#39;from runmanager.functions import *&#39;,sandbox,sandbox)</span>
+                <span class="c1"># # value = eval(expression,sandbox)</span>
+            <span class="c1"># # except Exception as e:</span>
+                <span class="c1"># # raise Exception(&#39;Error parsing global \&#39;%s\&#39;: &#39;%global_name + str(e))</span>
+            <span class="c1"># # if isinstance(value,types.GeneratorType):</span>
+               <span class="c1"># # print global_name + &#39; is iterable.&#39;</span>
+               <span class="c1"># # iterable_globals[global_name] = [tuple(value)]</span>
+            <span class="c1"># # elif isinstance(value, ndarray) or  isinstance(value, list):</span>
+               <span class="c1"># # print global_name + &#39; is iterable.&#39;            </span>
+               <span class="c1"># # iterable_globals[global_name] = value</span>
+            <span class="c1"># # else:</span>
+                <span class="c1"># # print global_name + &#39; is not iterable.&#39;</span>
+            <span class="c1"># return raw_globals</span>
+            
+<div class="viewcode-block" id="Run.get_globals_expansion"><a class="viewcode-back" href="../api/lyse.html#lyse.Run.get_globals_expansion">[docs]</a>    <span class="k">def</span> <span class="nf">get_globals_expansion</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">expansion_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">def</span> <span class="nf">append_expansion</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+            <span class="k">if</span> <span class="s1">&#39;expansion&#39;</span> <span class="ow">in</span> <span class="n">name</span><span class="p">:</span>
+                <span class="n">temp_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">temp_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="n">val</span><span class="p">:</span>
+                        <span class="n">expansion_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h5_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5_file</span><span class="p">:</span>
+            <span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;globals&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">visititems</span><span class="p">(</span><span class="n">append_expansion</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">expansion_dict</span></div>
+                   
+<div class="viewcode-block" id="Run.get_units"><a class="viewcode-back" href="../api/lyse.html#lyse.Run.get_units">[docs]</a>    <span class="k">def</span> <span class="nf">get_units</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">units_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">def</span> <span class="nf">append_units</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+            <span class="k">if</span> <span class="s1">&#39;units&#39;</span> <span class="ow">in</span> <span class="n">name</span><span class="p">:</span>
+                <span class="n">temp_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">temp_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="n">units_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h5_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5_file</span><span class="p">:</span>
+            <span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;globals&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">visititems</span><span class="p">(</span><span class="n">append_units</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">units_dict</span></div>
+
+<div class="viewcode-block" id="Run.globals_groups"><a class="viewcode-back" href="../api/lyse.html#lyse.Run.globals_groups">[docs]</a>    <span class="k">def</span> <span class="nf">globals_groups</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h5_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5_file</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;globals&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">[]</span>   </div>
+                
+<div class="viewcode-block" id="Run.globals_diff"><a class="viewcode-back" href="../api/lyse.html#lyse.Run.globals_diff">[docs]</a>    <span class="k">def</span> <span class="nf">globals_diff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other_run</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">globals_diff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other_run</span><span class="p">,</span> <span class="n">group</span><span class="p">)</span>            </div></div>
+    
+        
+<div class="viewcode-block" id="Sequence"><a class="viewcode-back" href="../api/lyse.html#lyse.Sequence">[docs]</a><span class="k">class</span> <span class="nc">Sequence</span><span class="p">(</span><span class="n">Run</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">h5_path</span><span class="p">,</span><span class="n">run_paths</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">run_paths</span><span class="p">,</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+            <span class="n">run_paths</span> <span class="o">=</span> <span class="n">run_paths</span><span class="p">[</span><span class="s1">&#39;filepath&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">h5_path</span> <span class="o">=</span> <span class="n">h5_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">no_write</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">h5_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5_file</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="s1">&#39;results&#39;</span> <span class="ow">in</span> <span class="n">h5_file</span><span class="p">:</span>
+                 <span class="n">h5_file</span><span class="o">.</span><span class="n">create_group</span><span class="p">(</span><span class="s1">&#39;results&#39;</span><span class="p">)</span>
+                 
+        <span class="bp">self</span><span class="o">.</span><span class="n">runs</span> <span class="o">=</span> <span class="p">{</span><span class="n">path</span><span class="p">:</span> <span class="n">Run</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">no_write</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">run_paths</span><span class="p">}</span>
+        
+        <span class="c1"># The group were the results will be stored in the h5 file will</span>
+        <span class="c1"># be the name of the python script which is instantiating this</span>
+        <span class="c1"># Sequence object:</span>
+        <span class="n">frame</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">currentframe</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="vm">__file__</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_back</span><span class="o">.</span><span class="n">f_locals</span><span class="p">[</span><span class="s1">&#39;__file__&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">PY2</span><span class="p">:</span>
+                <span class="vm">__file__</span> <span class="o">=</span> <span class="vm">__file__</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">getfilesystemencoding</span><span class="p">())</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">group</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.py&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">h5_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5_file</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">group</span> <span class="ow">in</span> <span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]:</span>
+                     <span class="n">h5_file</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">create_group</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;Warning: to write results, call &#39;</span>
+            <span class="s1">&#39;Sequence.set_group(groupname), specifying the name of the group &#39;</span>
+            <span class="s1">&#39;you would like to save results to. This normally comes from &#39;</span>
+            <span class="s1">&#39;the filename of your script, but since you</span><span class="se">\&#39;</span><span class="s1">re in interactive &#39;</span>
+            <span class="s1">&#39;mode, there is no scipt name. Opening in read only mode for &#39;</span>
+            <span class="s1">&#39;the moment.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">no_write</span> <span class="o">=</span> <span class="kc">True</span>
+        
+<div class="viewcode-block" id="Sequence.get_trace"><a class="viewcode-back" href="../api/lyse.html#lyse.Sequence.get_trace">[docs]</a>    <span class="k">def</span> <span class="nf">get_trace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">path</span><span class="p">:</span><span class="n">run</span><span class="o">.</span><span class="n">get_trace</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="k">for</span> <span class="n">path</span><span class="p">,</span><span class="n">run</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">runs</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span></div>
+        
+<div class="viewcode-block" id="Sequence.get_result_array"><a class="viewcode-back" href="../api/lyse.html#lyse.Sequence.get_result_array">[docs]</a>    <span class="k">def</span> <span class="nf">get_result_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">path</span><span class="p">:</span><span class="n">run</span><span class="o">.</span><span class="n">get_result_array</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="k">for</span> <span class="n">path</span><span class="p">,</span><span class="n">run</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">runs</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span></div>
+         
+<div class="viewcode-block" id="Sequence.get_traces"><a class="viewcode-back" href="../api/lyse.html#lyse.Sequence.get_traces">[docs]</a>    <span class="k">def</span> <span class="nf">get_traces</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;If you want to use this feature please ask me to implement it! -Chris&#39;</span><span class="p">)</span></div>
+             
+<div class="viewcode-block" id="Sequence.get_result_arrays"><a class="viewcode-back" href="../api/lyse.html#lyse.Sequence.get_result_arrays">[docs]</a>    <span class="k">def</span> <span class="nf">get_result_arrays</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;If you want to use this feature please ask me to implement it! -Chris&#39;</span><span class="p">)</span></div>
+     
+<div class="viewcode-block" id="Sequence.get_image"><a class="viewcode-back" href="../api/lyse.html#lyse.Sequence.get_image">[docs]</a>    <span class="k">def</span> <span class="nf">get_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;If you want to use this feature please ask me to implement it! -Chris&#39;</span><span class="p">)</span>     </div></div>
+
+
+<div class="viewcode-block" id="figure_to_clipboard"><a class="viewcode-back" href="../api/lyse.html#lyse.figure_to_clipboard">[docs]</a><span class="k">def</span> <span class="nf">figure_to_clipboard</span><span class="p">(</span><span class="n">figure</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Copy a matplotlib figure to the clipboard as a png. If figure is None,</span>
+<span class="sd">    the current figure will be copied. Copying the figure is implemented by</span>
+<span class="sd">    calling figure.savefig() and then copying the image data from the</span>
+<span class="sd">    resulting file. Any keyword arguments will be passed to the call to</span>
+<span class="sd">    savefig(). If bbox_inches keyword arg is not provided,</span>
+<span class="sd">    bbox_inches=&#39;tight&#39; will be used&quot;&quot;&quot;</span>
+    
+    <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+    <span class="kn">from</span> <span class="nn">zprocess</span> <span class="kn">import</span> <span class="n">start_daemon</span>
+    <span class="kn">import</span> <span class="nn">tempfile</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="s1">&#39;bbox_inches&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;bbox_inches&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;tight&#39;</span>
+               
+    <span class="k">if</span> <span class="n">figure</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">figure</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">()</span>
+
+    <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;.png&#39;</span><span class="p">,</span> <span class="n">delete</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">tempfile_name</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">name</span>
+
+    <span class="n">figure</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">tempfile_name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">tempfile2clipboard</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">LYSE_DIR</span><span class="p">,</span> <span class="s1">&#39;tempfile2clipboard.py&#39;</span><span class="p">)</span>
+    <span class="n">start_daemon</span><span class="p">([</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="n">tempfile2clipboard</span><span class="p">,</span> <span class="s1">&#39;--delete&#39;</span><span class="p">,</span> <span class="n">tempfile_name</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="register_plot_class"><a class="viewcode-back" href="../api/lyse.html#lyse.register_plot_class">[docs]</a><span class="k">def</span> <span class="nf">register_plot_class</span><span class="p">(</span><span class="n">identifier</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">spinning_top</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Warning: lyse.register_plot_class has no effect on scripts not run with</span>
+<span class="s2">            the lyse GUI.</span>
+<span class="s2">            &quot;&quot;&quot;</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dedent</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span>
+    <span class="n">_plot_classes</span><span class="p">[</span><span class="n">identifier</span><span class="p">]</span> <span class="o">=</span> <span class="bp">cls</span></div>
+
+<div class="viewcode-block" id="get_plot_class"><a class="viewcode-back" href="../api/lyse.html#lyse.get_plot_class">[docs]</a><span class="k">def</span> <span class="nf">get_plot_class</span><span class="p">(</span><span class="n">identifier</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">_plot_classes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">identifier</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="delay_results_return"><a class="viewcode-back" href="../api/lyse.html#lyse.delay_results_return">[docs]</a><span class="k">def</span> <span class="nf">delay_results_return</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">_delay_flag</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">spinning_top</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Warning: lyse.delay_results_return has no effect on scripts not run </span>
+<span class="s2">            with the lyse GUI.</span>
+<span class="s2">            &quot;&quot;&quot;</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dedent</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span>
+    <span class="n">_delay_flag</span> <span class="o">=</span> <span class="kc">True</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, labscript suite
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

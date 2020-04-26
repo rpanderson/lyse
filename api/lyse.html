@@ -1,0 +1,753 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>lyse package &mdash; lyse testing documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/lyse.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="lyse" href="modules.html" />
+    <link rel="prev" title="API Reference" href="../api.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> lyse
+          
+
+          
+            
+            <img src="../_static/lyse.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                testing
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">lyse package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-lyse.analysis_subprocess">lyse.analysis_subprocess module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-lyse.dataframe_utilities">lyse.dataframe_utilities module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-lyse.figure_manager">lyse.figure_manager module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-lyse.tempfile2clipboard">lyse.tempfile2clipboard module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-lyse">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html">lyse</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">lyse package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-lyse.analysis_subprocess">lyse.analysis_subprocess module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-lyse.dataframe_utilities">lyse.dataframe_utilities module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-lyse.figure_manager">lyse.figure_manager module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-lyse.tempfile2clipboard">lyse.tempfile2clipboard module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-lyse">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../releases.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://labscriptsuite.org">Home</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/labscript-suite/lyse">Source Code</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">lyse</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../api.html">API Reference</a> &raquo;</li>
+        
+      <li>lyse package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/lyse.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="lyse-package">
+<h1>lyse package<a class="headerlink" href="#lyse-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-lyse.analysis_subprocess">
+<span id="lyse-analysis-subprocess-module"></span><h2>lyse.analysis_subprocess module<a class="headerlink" href="#module-lyse.analysis_subprocess" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="lyse.analysis_subprocess.AnalysisWorker">
+<em class="property">class </em><code class="sig-prename descclassname">lyse.analysis_subprocess.</code><code class="sig-name descname">AnalysisWorker</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filepath</span></em>, <em class="sig-param"><span class="n">to_parent</span></em>, <em class="sig-param"><span class="n">from_parent</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/analysis_subprocess.html#AnalysisWorker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.analysis_subprocess.AnalysisWorker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="lyse.analysis_subprocess.AnalysisWorker.do_analysis">
+<code class="sig-name descname">do_analysis</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/analysis_subprocess.html#AnalysisWorker.do_analysis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.analysis_subprocess.AnalysisWorker.do_analysis" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.analysis_subprocess.AnalysisWorker.mainloop">
+<code class="sig-name descname">mainloop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/analysis_subprocess.html#AnalysisWorker.mainloop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.analysis_subprocess.AnalysisWorker.mainloop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.analysis_subprocess.AnalysisWorker.new_figure">
+<code class="sig-name descname">new_figure</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fig</span></em>, <em class="sig-param"><span class="n">identifier</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/analysis_subprocess.html#AnalysisWorker.new_figure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.analysis_subprocess.AnalysisWorker.new_figure" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.analysis_subprocess.AnalysisWorker.post_analysis_plot_actions">
+<code class="sig-name descname">post_analysis_plot_actions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/analysis_subprocess.html#AnalysisWorker.post_analysis_plot_actions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.analysis_subprocess.AnalysisWorker.post_analysis_plot_actions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.analysis_subprocess.AnalysisWorker.pre_analysis_plot_actions">
+<code class="sig-name descname">pre_analysis_plot_actions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/analysis_subprocess.html#AnalysisWorker.pre_analysis_plot_actions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.analysis_subprocess.AnalysisWorker.pre_analysis_plot_actions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.analysis_subprocess.AnalysisWorker.reset_figs">
+<code class="sig-name descname">reset_figs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/analysis_subprocess.html#AnalysisWorker.reset_figs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.analysis_subprocess.AnalysisWorker.reset_figs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="lyse.analysis_subprocess.Plot">
+<em class="property">class </em><code class="sig-prename descclassname">lyse.analysis_subprocess.</code><code class="sig-name descname">Plot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">figure</span></em>, <em class="sig-param"><span class="n">identifier</span></em>, <em class="sig-param"><span class="n">filepath</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/analysis_subprocess.html#Plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.analysis_subprocess.Plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="lyse.analysis_subprocess.Plot.analysis_complete">
+<code class="sig-name descname">analysis_complete</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">figure_in_use</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/analysis_subprocess.html#Plot.analysis_complete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.analysis_subprocess.Plot.analysis_complete" title="Permalink to this definition">¶</a></dt>
+<dd><p>To be overriden by subclasses.
+Called as part of the post analysis plot actions</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="lyse.analysis_subprocess.Plot.clear">
+<code class="sig-name descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/analysis_subprocess.html#Plot.clear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.analysis_subprocess.Plot.clear" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.analysis_subprocess.Plot.draw">
+<code class="sig-name descname">draw</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/analysis_subprocess.html#Plot.draw"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.analysis_subprocess.Plot.draw" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.analysis_subprocess.Plot.get_window_state">
+<code class="sig-name descname">get_window_state</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/analysis_subprocess.html#Plot.get_window_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.analysis_subprocess.Plot.get_window_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called when the Plot window is about to be closed due to a change in
+registered Plot window class</p>
+<p>Can be overridden by subclasses if custom information should be saved
+(although bear in mind that you will passing the information from the previous
+Plot subclass which might not be what you want unless the old and new classes
+have a common ancestor, or the change in Plot class is triggered by a reload
+of the module containing your Plot subclass).</p>
+<p>Returns a dictionary of information on the window state.</p>
+<p>If you have overridden this method, please call the base method first and
+then update the returned dictionary with your additional information before
+returning it from your method.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="lyse.analysis_subprocess.Plot.is_shown">
+<em class="property">property </em><code class="sig-name descname">is_shown</code><a class="headerlink" href="#lyse.analysis_subprocess.Plot.is_shown" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.analysis_subprocess.Plot.on_close">
+<code class="sig-name descname">on_close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/analysis_subprocess.html#Plot.on_close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.analysis_subprocess.Plot.on_close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called when the window is closed.</p>
+<p>Note that this only happens if the Plot window class has changed.
+Clicking the “X” button in the window title bar has been overridden to hide
+the window instead of closing it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="lyse.analysis_subprocess.Plot.on_copy_to_clipboard_triggered">
+<code class="sig-name descname">on_copy_to_clipboard_triggered</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/analysis_subprocess.html#Plot.on_copy_to_clipboard_triggered"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.analysis_subprocess.Plot.on_copy_to_clipboard_triggered" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.analysis_subprocess.Plot.on_lock_axes_triggered">
+<code class="sig-name descname">on_lock_axes_triggered</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/analysis_subprocess.html#Plot.on_lock_axes_triggered"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.analysis_subprocess.Plot.on_lock_axes_triggered" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.analysis_subprocess.Plot.restore_axis_limits">
+<code class="sig-name descname">restore_axis_limits</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/analysis_subprocess.html#Plot.restore_axis_limits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.analysis_subprocess.Plot.restore_axis_limits" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.analysis_subprocess.Plot.restore_window_state">
+<code class="sig-name descname">restore_window_state</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/analysis_subprocess.html#Plot.restore_window_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.analysis_subprocess.Plot.restore_window_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called when the Plot window is recreated due to a change in registered
+Plot window class.</p>
+<p>Can be overridden by subclasses if custom information should be restored
+(although bear in mind that you will get the information from the previous
+Plot subclass which might not be what you want unless the old and new classes
+have a common ancestor, or the change in Plot class is triggered by a reload
+of the module containing your Plot subclass).</p>
+<p>If overriding, please call the parent method in addition to your new code</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>state</strong> – A dictionary of information to restore</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="lyse.analysis_subprocess.Plot.save_axis_limits">
+<code class="sig-name descname">save_axis_limits</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/analysis_subprocess.html#Plot.save_axis_limits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.analysis_subprocess.Plot.save_axis_limits" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.analysis_subprocess.Plot.set_window_title">
+<code class="sig-name descname">set_window_title</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">identifier</span></em>, <em class="sig-param"><span class="n">filepath</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/analysis_subprocess.html#Plot.set_window_title"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.analysis_subprocess.Plot.set_window_title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.analysis_subprocess.Plot.show">
+<code class="sig-name descname">show</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/analysis_subprocess.html#Plot.show"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.analysis_subprocess.Plot.show" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.analysis_subprocess.Plot.update_window_size">
+<code class="sig-name descname">update_window_size</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/analysis_subprocess.html#Plot.update_window_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.analysis_subprocess.Plot.update_window_size" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="lyse.analysis_subprocess.PlotWindow">
+<em class="property">class </em><code class="sig-prename descclassname">lyse.analysis_subprocess.</code><code class="sig-name descname">PlotWindow</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">plot</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/analysis_subprocess.html#PlotWindow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.analysis_subprocess.PlotWindow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">PyQt5.QtWidgets.QWidget</span></code></p>
+<dl class="py method">
+<dt id="lyse.analysis_subprocess.PlotWindow.closeEvent">
+<code class="sig-name descname">closeEvent</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">QCloseEvent</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/analysis_subprocess.html#PlotWindow.closeEvent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.analysis_subprocess.PlotWindow.closeEvent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="lyse.analysis_subprocess.PlotWindow.close_signal">
+<code class="sig-name descname">close_signal</code><a class="headerlink" href="#lyse.analysis_subprocess.PlotWindow.close_signal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.analysis_subprocess.PlotWindow.event">
+<code class="sig-name descname">event</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">QEvent</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/lyse/analysis_subprocess.html#PlotWindow.event"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.analysis_subprocess.PlotWindow.event" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="lyse.analysis_subprocess.PlotWindow.newWindow">
+<code class="sig-name descname">newWindow</code><a class="headerlink" href="#lyse.analysis_subprocess.PlotWindow.newWindow" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="lyse.analysis_subprocess.PlotWindowCloseEvent">
+<em class="property">class </em><code class="sig-prename descclassname">lyse.analysis_subprocess.</code><code class="sig-name descname">PlotWindowCloseEvent</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">force</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/analysis_subprocess.html#PlotWindowCloseEvent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.analysis_subprocess.PlotWindowCloseEvent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">PyQt5.QtGui.QCloseEvent</span></code></p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="lyse.analysis_subprocess.set_win_appusermodel">
+<code class="sig-prename descclassname">lyse.analysis_subprocess.</code><code class="sig-name descname">set_win_appusermodel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">window_id</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/analysis_subprocess.html#set_win_appusermodel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.analysis_subprocess.set_win_appusermodel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-lyse.dataframe_utilities">
+<span id="lyse-dataframe-utilities-module"></span><h2>lyse.dataframe_utilities module<a class="headerlink" href="#module-lyse.dataframe_utilities" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="lyse.dataframe_utilities.asdatetime">
+<code class="sig-prename descclassname">lyse.dataframe_utilities.</code><code class="sig-name descname">asdatetime</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">timestr</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/dataframe_utilities.html#asdatetime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.dataframe_utilities.asdatetime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="lyse.dataframe_utilities.concat_with_padding">
+<code class="sig-prename descclassname">lyse.dataframe_utilities.</code><code class="sig-name descname">concat_with_padding</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">dataframes</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/dataframe_utilities.html#concat_with_padding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.dataframe_utilities.concat_with_padding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Concatenates dataframes with MultiIndex column labels,
+padding shallower hierarchies such that the MultiIndexes have
+the same nlevels.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="lyse.dataframe_utilities.flat_dict_to_flat_series">
+<code class="sig-prename descclassname">lyse.dataframe_utilities.</code><code class="sig-name descname">flat_dict_to_flat_series</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dictionary</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/dataframe_utilities.html#flat_dict_to_flat_series"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.dataframe_utilities.flat_dict_to_flat_series" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="lyse.dataframe_utilities.flat_dict_to_hierarchical_dataframe">
+<code class="sig-prename descclassname">lyse.dataframe_utilities.</code><code class="sig-name descname">flat_dict_to_hierarchical_dataframe</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dictionary</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/dataframe_utilities.html#flat_dict_to_hierarchical_dataframe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.dataframe_utilities.flat_dict_to_hierarchical_dataframe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make all the keys tuples of the same length</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="lyse.dataframe_utilities.flatten_dict">
+<code class="sig-prename descclassname">lyse.dataframe_utilities.</code><code class="sig-name descname">flatten_dict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dictionary</span></em>, <em class="sig-param"><span class="n">keys</span><span class="o">=</span><span class="default_value"></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/dataframe_utilities.html#flatten_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.dataframe_utilities.flatten_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a nested dictionary whose keys are strings, and returns a
+flat dictionary whose keys are tuples of strings, each element of
+which is the key for one level of the hierarchy.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="lyse.dataframe_utilities.get_dataframe_from_shot">
+<code class="sig-prename descclassname">lyse.dataframe_utilities.</code><code class="sig-name descname">get_dataframe_from_shot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filepath</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/dataframe_utilities.html#get_dataframe_from_shot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.dataframe_utilities.get_dataframe_from_shot" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="lyse.dataframe_utilities.get_dataframe_from_shots">
+<code class="sig-prename descclassname">lyse.dataframe_utilities.</code><code class="sig-name descname">get_dataframe_from_shots</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filepaths</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/dataframe_utilities.html#get_dataframe_from_shots"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.dataframe_utilities.get_dataframe_from_shots" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="lyse.dataframe_utilities.get_nested_dict_from_shot">
+<code class="sig-prename descclassname">lyse.dataframe_utilities.</code><code class="sig-name descname">get_nested_dict_from_shot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filepath</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/dataframe_utilities.html#get_nested_dict_from_shot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.dataframe_utilities.get_nested_dict_from_shot" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="lyse.dataframe_utilities.get_series_from_shot">
+<code class="sig-prename descclassname">lyse.dataframe_utilities.</code><code class="sig-name descname">get_series_from_shot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filepath</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/dataframe_utilities.html#get_series_from_shot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.dataframe_utilities.get_series_from_shot" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="lyse.dataframe_utilities.pad_columns">
+<code class="sig-prename descclassname">lyse.dataframe_utilities.</code><code class="sig-name descname">pad_columns</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span></em>, <em class="sig-param"><span class="n">n</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/dataframe_utilities.html#pad_columns"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.dataframe_utilities.pad_columns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add depth to hiererchical column labels with empty strings</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="lyse.dataframe_utilities.replace_with_padding">
+<code class="sig-prename descclassname">lyse.dataframe_utilities.</code><code class="sig-name descname">replace_with_padding</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span></em>, <em class="sig-param"><span class="n">row</span></em>, <em class="sig-param"><span class="n">index</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/dataframe_utilities.html#replace_with_padding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.dataframe_utilities.replace_with_padding" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-lyse.figure_manager">
+<span id="lyse-figure-manager-module"></span><h2>lyse.figure_manager module<a class="headerlink" href="#module-lyse.figure_manager" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="lyse.figure_manager.FigureManager">
+<em class="property">class </em><code class="sig-prename descclassname">lyse.figure_manager.</code><code class="sig-name descname">FigureManager</code><a class="reference internal" href="../_modules/lyse/figure_manager.html#FigureManager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.figure_manager.FigureManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="lyse.figure_manager.FigureManager.close">
+<code class="sig-name descname">close</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">identifier</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/figure_manager.html#FigureManager.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.figure_manager.FigureManager.close" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.figure_manager.FigureManager.get_first_empty_figure">
+<code class="sig-name descname">get_first_empty_figure</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">identifier</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/figure_manager.html#FigureManager.get_first_empty_figure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.figure_manager.FigureManager.get_first_empty_figure" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.figure_manager.FigureManager.reset">
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/figure_manager.html#FigureManager.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.figure_manager.FigureManager.reset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.figure_manager.FigureManager.set_first_figure_current">
+<code class="sig-name descname">set_first_figure_current</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/figure_manager.html#FigureManager.set_first_figure_current"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.figure_manager.FigureManager.set_first_figure_current" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.figure_manager.FigureManager.show">
+<code class="sig-name descname">show</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/figure_manager.html#FigureManager.show"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.figure_manager.FigureManager.show" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="lyse.figure_manager.install">
+<code class="sig-prename descclassname">lyse.figure_manager.</code><code class="sig-name descname">install</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/figure_manager.html#install"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.figure_manager.install" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-lyse.tempfile2clipboard">
+<span id="lyse-tempfile2clipboard-module"></span><h2>lyse.tempfile2clipboard module<a class="headerlink" href="#module-lyse.tempfile2clipboard" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="lyse.tempfile2clipboard.main">
+<code class="sig-prename descclassname">lyse.tempfile2clipboard.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse/tempfile2clipboard.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.tempfile2clipboard.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-lyse">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-lyse" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="lyse.Run">
+<em class="property">class </em><code class="sig-prename descclassname">lyse.</code><code class="sig-name descname">Run</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">h5_path</span></em>, <em class="sig-param"><span class="n">no_write</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#Run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.Run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="lyse.Run.get_all_image_labels">
+<code class="sig-name descname">get_all_image_labels</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#Run.get_all_image_labels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.Run.get_all_image_labels" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.Run.get_attrs">
+<code class="sig-name descname">get_attrs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">group</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#Run.get_attrs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.Run.get_attrs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all attributes of the specified group as a dictionary.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="lyse.Run.get_globals">
+<code class="sig-name descname">get_globals</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">group</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#Run.get_globals"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.Run.get_globals" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.Run.get_globals_expansion">
+<code class="sig-name descname">get_globals_expansion</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#Run.get_globals_expansion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.Run.get_globals_expansion" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.Run.get_globals_raw">
+<code class="sig-name descname">get_globals_raw</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">group</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#Run.get_globals_raw"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.Run.get_globals_raw" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.Run.get_image">
+<code class="sig-name descname">get_image</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">orientation</span></em>, <em class="sig-param"><span class="n">label</span></em>, <em class="sig-param"><span class="n">image</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#Run.get_image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.Run.get_image" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.Run.get_image_attributes">
+<code class="sig-name descname">get_image_attributes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">orientation</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#Run.get_image_attributes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.Run.get_image_attributes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.Run.get_images">
+<code class="sig-name descname">get_images</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">orientation</span></em>, <em class="sig-param"><span class="n">label</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">images</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#Run.get_images"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.Run.get_images" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.Run.get_result">
+<code class="sig-name descname">get_result</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">group</span></em>, <em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#Run.get_result"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.Run.get_result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return ‘result’ in ‘results/group’ that was saved by
+the save_result() method.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="lyse.Run.get_result_array">
+<code class="sig-name descname">get_result_array</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">group</span></em>, <em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#Run.get_result_array"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.Run.get_result_array" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.Run.get_result_arrays">
+<code class="sig-name descname">get_result_arrays</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">group</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">names</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#Run.get_result_arrays"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.Run.get_result_arrays" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.Run.get_results">
+<code class="sig-name descname">get_results</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">group</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">names</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#Run.get_results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.Run.get_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iteratively call get_result(group,name) for each name provided.
+Returns a list of all results in same order as names provided.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="lyse.Run.get_trace">
+<code class="sig-name descname">get_trace</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#Run.get_trace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.Run.get_trace" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.Run.get_traces">
+<code class="sig-name descname">get_traces</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">names</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#Run.get_traces"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.Run.get_traces" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.Run.get_units">
+<code class="sig-name descname">get_units</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">group</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#Run.get_units"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.Run.get_units" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.Run.globals_diff">
+<code class="sig-name descname">globals_diff</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other_run</span></em>, <em class="sig-param"><span class="n">group</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#Run.globals_diff"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.Run.globals_diff" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.Run.globals_groups">
+<code class="sig-name descname">globals_groups</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#Run.globals_groups"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.Run.globals_groups" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.Run.save_result">
+<code class="sig-name descname">save_result</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">group</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">overwrite</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#Run.save_result"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.Run.save_result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save a result to h5 file. Defaults are to save to the active group
+in the ‘results’ group and overwrite an existing result.
+Note that the result is saved as an attribute of ‘results/group’ and
+overwriting attributes causes h5 file size bloat.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="lyse.Run.save_result_array">
+<code class="sig-name descname">save_result_array</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">group</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">overwrite</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">keep_attrs</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#Run.save_result_array"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.Run.save_result_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save data array to h5 file. Defaults are to save to the active
+group in the ‘results’ group and overwrite existing data.
+Additional keyword arguments are passed directly to h5py.create_dataset().</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="lyse.Run.save_result_arrays">
+<code class="sig-name descname">save_result_arrays</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#Run.save_result_arrays"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.Run.save_result_arrays" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iteratively call save_result_array() on multiple data sets.
+Assumes arguments are ordered such that each dataset to be saved is
+preceeded by the name to save it as.
+All keyword arguments are passed to each call of save_result_array().</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="lyse.Run.save_results">
+<code class="sig-name descname">save_results</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#Run.save_results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.Run.save_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iteratively call save_result() on multiple results.
+Assumes arguments are ordered such that each result to be saved is
+preceeded by the name of the attribute to save it under.
+Keywords arguments are passed to each call of save_result().</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="lyse.Run.save_results_dict">
+<code class="sig-name descname">save_results_dict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">results_dict</span></em>, <em class="sig-param"><span class="n">uncertainties</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#Run.save_results_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.Run.save_results_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.Run.set_group">
+<code class="sig-name descname">set_group</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">groupname</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#Run.set_group"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.Run.set_group" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.Run.trace_names">
+<code class="sig-name descname">trace_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#Run.trace_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.Run.trace_names" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="lyse.Sequence">
+<em class="property">class </em><code class="sig-prename descclassname">lyse.</code><code class="sig-name descname">Sequence</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">h5_path</span></em>, <em class="sig-param"><span class="n">run_paths</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#Sequence"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.Sequence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#lyse.Run" title="lyse.Run"><code class="xref py py-class docutils literal notranslate"><span class="pre">lyse.Run</span></code></a></p>
+<dl class="py method">
+<dt id="lyse.Sequence.get_image">
+<code class="sig-name descname">get_image</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#Sequence.get_image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.Sequence.get_image" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.Sequence.get_result_array">
+<code class="sig-name descname">get_result_array</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#Sequence.get_result_array"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.Sequence.get_result_array" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.Sequence.get_result_arrays">
+<code class="sig-name descname">get_result_arrays</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#Sequence.get_result_arrays"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.Sequence.get_result_arrays" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.Sequence.get_trace">
+<code class="sig-name descname">get_trace</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#Sequence.get_trace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.Sequence.get_trace" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="lyse.Sequence.get_traces">
+<code class="sig-name descname">get_traces</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#Sequence.get_traces"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.Sequence.get_traces" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="lyse.data">
+<code class="sig-prename descclassname">lyse.</code><code class="sig-name descname">data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filepath</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">host</span><span class="o">=</span><span class="default_value">'localhost'</span></em>, <em class="sig-param"><span class="n">port</span><span class="o">=</span><span class="default_value">42519</span></em>, <em class="sig-param"><span class="n">timeout</span><span class="o">=</span><span class="default_value">5</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="lyse.delay_results_return">
+<code class="sig-prename descclassname">lyse.</code><code class="sig-name descname">delay_results_return</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#delay_results_return"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.delay_results_return" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="lyse.figure_to_clipboard">
+<code class="sig-prename descclassname">lyse.</code><code class="sig-name descname">figure_to_clipboard</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">figure</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#figure_to_clipboard"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.figure_to_clipboard" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copy a matplotlib figure to the clipboard as a png. If figure is None,
+the current figure will be copied. Copying the figure is implemented by
+calling figure.savefig() and then copying the image data from the
+resulting file. Any keyword arguments will be passed to the call to
+savefig(). If bbox_inches keyword arg is not provided,
+bbox_inches=’tight’ will be used</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="lyse.get_plot_class">
+<code class="sig-prename descclassname">lyse.</code><code class="sig-name descname">get_plot_class</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">identifier</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#get_plot_class"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.get_plot_class" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="lyse.globals_diff">
+<code class="sig-prename descclassname">lyse.</code><code class="sig-name descname">globals_diff</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">run1</span></em>, <em class="sig-param"><span class="n">run2</span></em>, <em class="sig-param"><span class="n">group</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#globals_diff"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.globals_diff" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="lyse.register_plot_class">
+<code class="sig-prename descclassname">lyse.</code><code class="sig-name descname">register_plot_class</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">identifier</span></em>, <em class="sig-param"><span class="n">cls</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lyse.html#register_plot_class"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lyse.register_plot_class" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="modules.html" class="btn btn-neutral float-right" title="lyse" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../api.html" class="btn btn-neutral float-left" title="API Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, labscript suite
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
