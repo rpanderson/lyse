@@ -10,3 +10,4 @@ dist
 conda_build
 conda_packages
 docs/build
+docs/source/api

@@ -17,7 +17,7 @@ help:
 .PHONY: buildapi
 buildapi:
 	rm -rf source/api/*
-	sphinx-apidoc -f -o source/api ..
+	sphinx-apidoc -f -o source/api ../lyse
 
 .PHONY: clean
 clean:
