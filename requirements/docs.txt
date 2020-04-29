@@ -2,5 +2,5 @@ Sphinx==3.0.1
 sphinx-rtd-theme==0.4.3
 recommonmark==0.6.0
 git+git://github.com/labscript-suite/labscript_utils@master#egg=labscript_utils
-git+git://github.com/labscript-suite/labscript_utils@master#egg=labscript
+git+git://github.com/labscript-suite/labscript@master#egg=labscript
 git+git://github.com/labscript-suite/runmanager@master#egg=runmanager
