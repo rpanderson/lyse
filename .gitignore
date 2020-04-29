@@ -9,3 +9,4 @@ dist
 *.eggs
 conda_build
 conda_packages
+docs/build
