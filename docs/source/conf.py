@@ -42,6 +42,8 @@ extensions = [
     "recommonmark",
 ]
 
+autodoc_typehints = 'description'
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
@@ -58,12 +60,12 @@ exclude_patterns = []
 
 # intersphinx allows us to link directly to other repos sphinxdocs.
 # https://www.sphinx-doc.org/en/master/usage/extensions/intersphinx.html
-# intersphinx_mapping = {
-    # 'python': ('https://docs.python.org/3', None),
-    # 'numpy': ('https://numpy.org/doc/stable/', None),
+intersphinx_mapping = {
+    'python': ('https://docs.python.org/3', None),
+    'numpy': ('https://numpy.org/doc/stable/', None),
     # 'scipy': ('https://docs.scipy.org/doc/scipy/reference/', None),
-    # 'pandas': ('https://pandas.pydata.org/pandas-docs/stable/', None)
-# }
+    'pandas': ('https://pandas.pydata.org/pandas-docs/stable/', None)
+}
 
 # -- Options for HTML output -------------------------------------------------
 
