@@ -10,32 +10,32 @@ library, and two enhancements.
 - Fix bug where lyse would fail to terminate subprocesses upon quit. Normal
   subprocesses would eventually terminate themselves, but this caused lyse to hang
   whilst closing waiting for them.
-  ([PR #63](https://bitbucket.org/labscript_suite/labscript_devices/pull-requests/63))
+  ([PR #63](http://bitbucket-archive.labscriptsuite.org/#!/labscript_suite/lyse/pull-requests/63))
 
 - Increase the timeout for starting subprocesses to 30 seconds. Slow computers starting
   lyse, or when starting many subprocesses at once, would often cause timeouts which
   necessitated restarting lyse.
-  ([PR #64](https://bitbucket.org/labscript_suite/labscript_devices/pull-requests/64))
+  ([PR #64](http://bitbucket-archive.labscriptsuite.org/#!/labscript_suite/lyse/pull-requests/64))
 
 - Fix bug where lyse's close button was unresponsive if there were no analysis routines.
-  ([PR #67](https://bitbucket.org/labscript_suite/labscript_devices/pull-requests/67))
+  ([PR #67](http://bitbucket-archive.labscriptsuite.org/#!/labscript_suite/lyse/pull-requests/67))
 
 - Fix incorrect logic for updating the Qt model and dataframe in lyse - it is hoped that
   this will resolve an intermittent issue (issue #45) in which the dataframe and Qt
   model are sometimes not updated after analysis completes. If anyone sees the buggy
   behaviour again, please reopen issue #45 or a new bug report.
-  ([PR #68](https://bitbucket.org/labscript_suite/labscript_devices/pull-requests/68))
+  ([PR #68](http://bitbucket-archive.labscriptsuite.org/#!/labscript_suite/lyse/pull-requests/68))
 
 - Fix a bug where lyse could crash if loading shots with different numbers of levels in
   the hierarchy of their corresponding dataframes.
-  ([PR #71](https://bitbucket.org/labscript_suite/labscript_devices/pull-requests/71))
+  ([PR #71](http://bitbucket-archive.labscriptsuite.org/#!/labscript_suite/lyse/pull-requests/71))
 
 - In analysis routine subprocesses, force the multiprocessing module to spawn new
   processes instead of forking. This allows analysis routines to use the multiprocessing
   module, whereas otherwise this causes crashes due to zmq not being fork-safe. This
   only affects Unix, where forking is the default behaviour of the multiprocessing
   module - on Windows this was not an issue since processes were always spawned fresh.
-  ([PR #65](https://bitbucket.org/labscript_suite/labscript_devices/pull-requests/65))
+  ([PR #65](http://bitbucket-archive.labscriptsuite.org/#!/labscript_suite/lyse/pull-requests/65))
 
 ## Enhancements
 
@@ -44,18 +44,18 @@ library, and two enhancements.
   `labscript_utils.properties.get/set_attribute(s)`. This means that datatypes not
   supported natively by HDF5 are JSON encoded and saved as a string with a prefix
   indicating this.
-  (PRs [#66](https://bitbucket.org/labscript_suite/labscript_devices/pull-requests/66)
-   and [#69](https://bitbucket.org/labscript_suite/labscript_devices/pull-requests/69))
+  (PRs [#66](http://bitbucket-archive.labscriptsuite.org/#!/labscript_suite/lyse/pull-requests/66)
+   and [#69](http://bitbucket-archive.labscriptsuite.org/#!/labscript_suite/lyse/pull-requests/69))
 
 - Allow instantiating a `Run()` object from within a function, not just at the global
   scope. The default group that results will be saved to will be the name of the file
   the `Run()` object is instantiated in.
-  ([PR #72](https://bitbucket.org/labscript_suite/labscript_devices/pull-requests/72))
+  ([PR #72](http://bitbucket-archive.labscriptsuite.org/#!/labscript_suite/lyse/pull-requests/72))
 
 ## API Changes
 
 - Update to no longer use the deprecated `pandas` `convert_objects()` method, in favour
   of the newer `infer_objects` method. 
-  ([PR #70](https://bitbucket.org/labscript_suite/labscript_devices/pull-requests/70))
+  ([PR #70](http://bitbucket-archive.labscriptsuite.org/#!/labscript_suite/lyse/pull-requests/70))
 
 - Do not throw a version error about `pandas` v1.0

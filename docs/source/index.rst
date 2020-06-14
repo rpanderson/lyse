@@ -12,6 +12,7 @@
    Home <http://labscriptsuite.org>
    Source Code <https://github.com/labscript-suite/lyse>
 
+
 lyse
 ====
 
@@ -24,7 +25,7 @@ A set of Python scripts can be loaded for each analysis category, which will run
 
 The DataFrame is displayed in the lyse GUI and can also be accessed remotely from another PC as follows:
 
-.. code-block:: Python
+.. code-block:: python
 
    import lyse
    df = lyse.data(host='127.0.0.1', port=42519)
@@ -32,6 +33,8 @@ The DataFrame is displayed in the lyse GUI and can also be accessed remotely fro
 Moreover, the lyse DataFrame can be serialised so that an analysis session can be restored in lyse or in a headless environment.
 
 .. image:: https://bitbucket.org/repo/BMBAeq/images/4286820861-lyse_example.png
+   :align: center
+   :class: screenshot
 
 The lyse interface, comprising:
 
@@ -50,12 +53,15 @@ lyse can be installed on Python 3.6 and later by running:
 
 .. code-block:: console
 
-   $ pip install --index-url https://test.pypi.org/simple/ lyse
+   $ pip install lyse
 
-Tutorials
----------
+Or using `conda`, from the *labscript suite* channel on `Anaconda Cloud <https://anaconda.org/labscript-suite>`_:
 
-Tutorials with analysis examples can be found at `labscriptsuite.org <http://labscriptsuite.org/tutorials>`_.
+.. code-block:: console
+
+   $ conda install -c labscript-suite lyse
+
+For further details, see the *labscript suite* `installation documentation <https://docs.labscriptsuite.org/en/latest/installation>`_.
 
 
 Indices and tables
